@@ -1,4 +1,4 @@
-// Il y a 3 types basiques en TypeScript
+Il y a 3 types basiques en TypeScript
 ```javascript
 var isDone: boolean = false;
 var lines: number = 42;
@@ -6,41 +6,50 @@ var name: string = "Anders";
 ```
 
 
-// Si nous ne pouvons pas déterminer le type, on utilise `Any`
+Si nous ne pouvons pas déterminer le type, on utilise `Any`
+```javascript
 var notSure: any = 4;
 notSure = "maybe a string instead";
 notSure = false; // ok, définitivement un booléen
+```
 
-// Pour les collections, il y a les tableaux typés et les tableaux génériques
+
+Pour les collections, il y a les tableaux typés et les tableaux génériques
+```javascript
 var list: number[] = [1, 2, 3]; // Un tableaux typé
 var list: Array<number> = [1, 2, 3]; // un tableau générique
+```
 
-// Pour les énumeration
+Pour les énumeration
+```javascript
 enum Color { Red, Green, Blue };
 var c: Color = Color.Green;
+```
+Enfin, `void` est utilisé dans le cas spécifique d'une fonction ne retournant rien
 
-// Enfin, `void` est utilisé dans le cas spécifique
-// d'une fonction ne retournant rien
+```javascript
 function bigHorribleAlert(): void {
   alert("Je suis une petite boîte ennuyeuse !");
 }
+```
 
-// Les fonctions sont des entités de première classe. Le langage supporte
-// les expressions lambda et utilise l'inférence de type
+Les fonctions sont des entités de première classe. Le langage supporte
+les expressions lambda et utilise l'inférence de type
+Les fonctions ci-dessous sont équivalentes, 
 
-// Les fonctions ci-dessous sont équivalentes, une signature identique
-// sera inférée par le compilateur, et le même JavaScript sera généré
+```javascript
+une signature identique sera inférée par le compilateur, et le même JavaScript sera généré
 var f1 = function(i: number): number { return i * i; }
-// Retourne un type inféré
+Retourne un type inféré
 var f2 = function(i: number) { return i * i; }
 var f3 = (i: number): number => { return i * i; }
-// Retourne un type inféré
+Retourne un type inféré
 var f4 = (i: number) => { return i * i; }
-// Retourne un type inféré, ici le mot clé `return` n'est pas nécessaire
+Retourne un type inféré, ici le mot clé `return` n'est pas nécessaire
 var f5 = (i: number) =>  i * i;
-
-// Les interfaces sont structurées, tout les objets qui ont ces propriétés
-// sont compatible avec l'interface
+```
+Les interfaces sont structurées, tout les objets qui ont ces propriétés sont compatible avec l'interface
+```javascript
 interface Person {
   name: string;
   // Les propriétés optionnelles sont identifiées avec un "?"
@@ -48,32 +57,39 @@ interface Person {
   // Et bien sûr, les fonctions
   move(): void;
 }
-
-// Un objet implémentant l'interface "Person" peut être traité comme 
-// une Person car il a les propriétés "name" et "move"
+```
+Un objet implémentant l'interface "Person" peut être traité comme une Person car il a les propriétés "name" et "move"
+```javascript
 var p: Person = { name: "Bobby", move: () => {} };
-// Des objets implémentants la propriété optionnelle :
+```
+Des objets implémentants la propriété optionnelle :
+```javascript
 // valide car "age" est un nombre
 var validPerson: Person = { name: "Bobby", age: 42, move: () => {} };
 // invalide car "age" n'est pas un nombre
 var invalidPerson: Person = { name: "Bobby", age: true };
+```
 
-// Les interfaces peuvent aussi décrire un type de fonction
+Les interfaces peuvent aussi décrire un type de fonction
+```javascript
 interface SearchFunc {
   (source: string, subString: string): boolean;
 }
+```
 
-// Seul les types des paramètres sont importants. Les noms ne le sont pas.
+Seul les types des paramètres sont importants. Les noms ne le sont pas.
+```javascript
 var mySearch: SearchFunc;
 mySearch = function(src: string, sub: string) {
   return src.search(sub) != -1;
 }
-
-// Les membres des classes sont publiques par défaut.
+```
+```javascript
+Les membres des classes sont publiques par défaut.
 class Point {
   // Propriétés
   x: number;
-
+```javascript
   // Constructeur - Les mots clés "public" et "private" dans ce contexte
   //  génèrent le code de la propriété et son initialisation dans le
   // constructeur. Ici, "y" sera défini de la même façon que "x",
